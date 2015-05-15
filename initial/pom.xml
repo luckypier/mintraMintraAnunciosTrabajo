@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.springframework</groupId>
-    <artifactId>gs-securing-web</artifactId>
+        <artifactId>gs-securing-web</artifactId>
     <version>0.1.0</version>
 
     <parent>
@@ -17,6 +17,19 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
         </dependency>
     </dependencies>
 
@@ -48,5 +61,65 @@
             <url>https://repo.spring.io/libs-release</url>
         </pluginRepository>
     </pluginRepositories>
+
+    <!--
+
+    Securing a Web Application
+    https://spring.io/guides/gs/securing-web/
+
+    jsoup HTML parser
+    http://www.mkyong.com/java/jsoup-html-parser-hello-world-examples/
+    http://www.mkyong.com/java/how-to-get-url-content-in-java/
+    http://jsoup.org/cookbook/extracting-data/dom-navigation
+
+
+    http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
+    http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#introducing-thymeleaf
+
+    #####
+    USER STORY
+
+    1. busque la palabra abogado, legal y derecho en bolsa laboral peru
+      A. quiero un boton para traer nuevos puestos
+
+      B. poner estados, NUEVO, VISTO, PROCESADO, DESCARTADO
+
+    2. posibilidada para ingresar alertas
+
+    3. enviar las alertas a google calendar
+
+    ##################################
+
+    Building REST services with Spring
+    http://spring.io/guides/tutorials/bookmarks/
+
+    Post JSON to spring REST webservice
+    http://www.leveluplunch.com/java/tutorials/014-post-json-to-spring-rest-webservice/
+
+    Spring Boot: data access with JPA, Hibernate and MySQL
+    http://blog.netgloo.com/2014/10/06/spring-boot-data-access-with-jpa-hibernate-and-mysql/
+
+
+    JPA & hibernate
+    Get all objects for an entity
+    http://www.codemiles.com/jpa/get-all-objects-for-an-entity-t6273.html
+
+    Selecting All JPA Entities As Criteria Query
+    http://www.adam-bien.com/roller/abien/entry/selecting_all_jpa_entities_as
+
+    h2 HikariCP Hibernate JPA
+    http://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-getting-the-required-dependencies/
+
+
+
+
+
+
+    ######################
+        V 0.1
+        http://localhost:8080/scanRecords               WORKING, NOT UPDATABLE
+        http://localhost:8080/static/projects.html#/    LIST FAKE WORKING
+
+     -->
 
 </project>

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MINTRA Buscador</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <p th:text="'Actualizado el ' + ${updated}" />
+    <p th:text="${count}+' registros encontrados'" />
+
+    <table border="1" WIDTH="100%">
+        <tr>
+            <td># Convocatoria</td>
+            <td>status</td>
+            <td>institucion</td>
+            <td>cargo</td>
+            <td>requisitos</td>
+
+        </tr>
+        <tr data-th-each="row : ${newJobAnnouncements}">
+            <td>
+                <a th:href="${row.link}" target="_blank">
+                    <p th:text="${row.nroConvocatoria}" />
+                </a>
+            </td>
+            <td th:switch="${row.status}">
+                <p th:case="0">NUEVO</p>
+                <p th:case="1">EN PROCESO</p>
+                <p th:case="2">PROCESADO</p>
+                <p th:case="3">DESCARTADO</p>
+            </td>
+            <td data-th-text="${row.institucion}">...</td>
+            <td data-th-text="${row.cargo}">...</td>
+            <td data-th-text="${row.requisitos}">...</td>
+
+        </tr>
+    </table>
+
+</body>
+</html>
