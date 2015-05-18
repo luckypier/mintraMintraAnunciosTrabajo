@@ -9,13 +9,23 @@ angular.module('mongolab', ['ngResource']).
           }
       );*/
 
-        var Project = $resource('/todo/:toDoId', {toDoId:'@id'} );
+        var Project = $resource(
+            '/todo/:toDoId',
+            {toDoId:'@id'},
+            {
+                update: {
+                    method: 'PUT' // this method issues a PUT request
+                }
+            }
+         );
 
- 
+
+ /*
       Project.prototype.update = function(cb) {
         return Project.update({toDoId: this.id},
             angular.extend({}, this, {_id:undefined}), cb);
       };
+      */
 
       Project.prototype.destroy = function(cb) {
         return Project.remove({id: this._id.$oid}, cb);

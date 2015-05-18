@@ -68,9 +68,11 @@ function EditCtrl($scope, $location, $routeParams, Project) {
     };
 
     $scope.save = function () {
-        $scope.project.update(function () {
+
+        $scope.project.$update(function () {
             $location.path('/');
         });
+
     };
 }
 
