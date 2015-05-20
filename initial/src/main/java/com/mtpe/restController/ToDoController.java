@@ -39,6 +39,12 @@ public class ToDoController {
         todos.add(toDoTwo);
     }
 
+    public void create(
+            @RequestBody ToDo toDo
+    ){
+        //not necesarry now
+    }
+
     @RequestMapping(
             method = RequestMethod.GET
     )
@@ -55,7 +61,7 @@ public class ToDoController {
             method = RequestMethod.GET
     )
     @ResponseBody
-    public ToDo getId(
+    public ToDo get(
             @PathVariable(value="id") Integer id
     ) {
 
@@ -74,7 +80,6 @@ public class ToDoController {
     )
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(
-
             @RequestBody ToDo toDo,
             @PathVariable(value = "id") Integer id
     ) {
@@ -84,6 +89,12 @@ public class ToDoController {
         }catch (Exception e){
             System.out.println("ERROR PUT >>>>"+id);
         }
+    }
+
+    public void remove(
+            @PathVariable(value = "id") Integer id
+    ){
+        //not necesarry now
     }
 
 }

@@ -120,6 +120,18 @@
         http://localhost:8080/scanRecords               WORKING, NOT UPDATABLE
         http://localhost:8080/static/projects.html#/    LIST FAKE WORKING
 
+        V 0.3
+        to work with modal, it would be useful
+        but i need angular 1.3
+        so updating sources
+
+        http://localhost:8080/static/angular104/projects.html#/
+        http://localhost:8080/static/angular_1_3_15/index.html#/
+
+        firebase bug    http://stackoverflow.com/questions/28942661/firebase-api-issue-with-angularjs-website-example-project
+        modal   https://angular-ui.github.io/bootstrap/
+
+
      -->
 
 </project>
