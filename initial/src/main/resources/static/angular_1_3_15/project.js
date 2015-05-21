@@ -1,10 +1,10 @@
-angular.module('project', ['ngRoute', 'firebase'])
+angular.module('project', ['firebase', 'ngRoute'])
  
-.value('fbURL', 'https://ng-projects-list.firebaseio.com/')
+.value('fbURL', 'https://sb-plnkr.firebaseio.com/so:28942661')
 .service('fbRef', function(fbURL) {
   return new Firebase(fbURL)
 })
-.service('fbAuth', function($q, $firebase, $firebaseAuth, fbRef) {
+.service('fbAuth', function($q, $firebaseAuth, fbRef) {
   var auth;
   return function () {
       if (auth) return $q.when(auth);
@@ -20,34 +20,17 @@ angular.module('project', ['ngRoute', 'firebase'])
       return deferred.promise;
   }
 })
- 
-.service('Projects', function($q, $firebase, fbRef, fbAuth) {
-  var self = this;
-  this.fetch = function () {
-    if (this.projects) return $q.when(this.projects);
-    return fbAuth().then(function(auth) {
-      var deferred = $q.defer();
-      var ref = fbRef.child('projects-fresh/' + auth.auth.uid);
-      var $projects = $firebase(ref);
-      ref.on('value', function(snapshot) {
-        if (snapshot.val() === null) {
-        //window.projectsArray esta dando undefinded
-          $projects.$set(window.projectsArray);
-        }
-        self.projects = $projects.$asArray();
-        deferred.resolve(self.projects);
-      });
- 
-      //Remove projects list when no longer needed.
-      ref.onDisconnect().remove();
-      return deferred.promise;
+.service('Projects', function($q, $firebaseArray, fbRef) {
+    this.sync = $firebaseArray(fbRef);
+    this.sync.$loaded().then(function(data) {
+      var projects = data;
     });
-  };
-})
+    return this.sync;
+  })
  
 .config(function($routeProvider) {
   $routeProvider
-    .when('/', {
+    /*.when('/', {
       controller:'ProjectListController as projectList',
       templateUrl:'list.html',
       resolve: {
@@ -55,6 +38,10 @@ angular.module('project', ['ngRoute', 'firebase'])
           return Projects.fetch();
         }
       }
+    }) */
+    .when('/', {
+        controller:'ProjectListController as projectList',
+        templateUrl:'list.html'
     })
     .when('/edit/:projectId', {
       controller:'EditProjectController as editProject',
@@ -69,9 +56,12 @@ angular.module('project', ['ngRoute', 'firebase'])
     });
 })
  
-.controller('ProjectListController', function(projects) {
-  var projectList = this;
-  projectList.projects = projects;
+.controller('ProjectListController', function($scope, $location, Projects) {
+  Projects.$loaded().then(function(data){
+    $scope.projects = data;
+    console.log('LOADED '+$scope.projects.length);
+  });
+
 })
  
 .controller('NewProjectController', function($location, Projects) {

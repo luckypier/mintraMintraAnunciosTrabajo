@@ -1,19 +1,22 @@
-<input type="text" ng-model="projectList.search" class="search-query" id="projects_search"
+
+<input type="text" ng-model="search" class="search-query" id="projects_search"
        placeholder="Search">
+
 <table>
     <thead>
     <tr>
         <th>Project</th>
         <th>Description</th>
-        <th><a href="#/new"><i class="icon-plus-sign"></i></a></th>
+        <!-- <th><a href="#/new"><i class="icon-plus-sign"></i></a></th> -->
+        <th><a href="#/new">New</i></a></th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="project in projectList.projects | filter:projectList.search | orderBy:'name'">
-        <td><a ng-href="{{project.site}}" target="_blank">{{project.name}}</a></td>
-        <td>{{project.description}}</td>
+    <tr ng-repeat="project in projects | filter:search | orderBy:'content'">
+        <td><a ng-href="{{project.$id}}" target="_blank">{{project.$id}}</a></td>
+        <td>{{project.content}}</td>
         <td>
-            <a ng-href="#/edit/{{project.$id}}"><i class="icon-pencil"></i></a>
+            <a ng-href="#/edit/{{project.$id}}">edit</i></a>
         </td>
     </tr>
     </tbody>
