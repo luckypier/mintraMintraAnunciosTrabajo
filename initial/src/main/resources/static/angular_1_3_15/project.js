@@ -64,33 +64,31 @@ angular.module('project', ['firebase', 'ngRoute'])
 
 })
  
-.controller('NewProjectController', function($location, Projects) {
-  var editProject = this;
-  editProject.save = function() {
-      Projects.$add(editProject.project).then(function(data) {
+.controller('NewProjectController',
+function($scope, $location, Projects) {
+  $scope.save = function() {
+      Projects.$add($scope.project).then(function(data) {
           $location.path('/');
       });
   };
 })
  
 .controller('EditProjectController',
-  function($location, $routeParams, Projects) {
-    var editProject = this;
-    var projectId = $routeParams.projectId,
-        projectIndex;
+  function($scope, $location, $routeParams, Projects) {
+    var projectId = $routeParams.projectId;
+
+    $scope.projects = Projects;
+    projectIndex = $scope.projects.$indexFor(projectId);
+    $scope.project = $scope.projects[projectIndex];
  
-    editProject.projects = Projects.projects;
-    projectIndex = editProject.projects.$indexFor(projectId);
-    editProject.project = editProject.projects[projectIndex];
- 
-    editProject.destroy = function() {
-        editProject.projects.$remove(editProject.project).then(function(data) {
+    $scope.destroy = function() {
+        $scope.projects.$remove($scope.project).then(function(data) {
             $location.path('/');
         });
     };
  
-    editProject.save = function() {
-        editProject.projects.$save(editProject.project).then(function(data) {
+    $scope.save = function() {
+        $scope.projects.$save($scope.project).then(function(data) {
            $location.path('/');
         });
     };
